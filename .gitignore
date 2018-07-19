@@ -1,3 +1,18 @@
+src/.clang-format
+clean_branch.sh
+*.log
+.DS_Store
+build/
+dist/
+debug/
+release/
+.qmake.stash
+qrc_bitcoin.cpp
+config.log
+config.status
+src/secp256k1/Makefile
+.gitignore
+
 # Prerequisites
 *.d
 
@@ -30,3 +45,4 @@
 *.exe
 *.out
 *.app
+
