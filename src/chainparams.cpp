@@ -24,7 +24,7 @@ struct SeedSpec6 {
 //
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits)
 {
-    const char* pszTimestamp = "World Cup final result: France 4-2 Croatia";
+    const char* pszTimestamp = "World Cup 2018 Final Result: France 4-2 Croatia";
     std::vector<CTxIn> vin;
     vin.resize(1);
     vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -80,17 +80,17 @@ public:
 
         /*
         mainnet.genesis :
-            CBlock(hash=00000b4e6d23c916f39c4dc92cd45faf5dfeeea8b51d43aee01c2f7e2bab977f, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=301b640a692b4007e625422264c59df43e7f5559d76f0d91f3db517abdd2dac6, nTime=1531969200, nBits=1e0ffff0, nNonce=26942, vtx=1, vchBlockSig=)
-          Coinbase(hash=301b640a692b4007e625422264c59df43e7f5559d76f0d91f3db517abdd2dac6, nTime=1531969200, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-            CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a2a576f726c64204375702066696e616c20726573756c743a204672616e636520342d322043726f61746961)
+            CBlock(hash=00000ef8f68dfa24b1d004ea73b55f1a90ea1787a033bcd8ce84bdac7526cfc9, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=95c3dd755be8df88257a6f62fe1c19e76e07218bfc5171c23240a54a726b91b1, nTime=1532070000, nBits=1e0ffff0, nNonce=647464, vtx=1, vchBlockSig=)
+          Coinbase(hash=95c3dd755be8df88257a6f62fe1c19e76e07218bfc5171c23240a54a726b91b1, nTime=1532070000, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+            CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a2f576f726c642043757020323031382046696e616c20526573756c743a204672616e636520342d322043726f61746961)
             CTxOut(empty)
 
-          vMerkleTree:  301b640a692b4007e625422264c59df43e7f5559d76f0d91f3db517abdd2dac6
+          vMerkleTree:  95c3dd755be8df88257a6f62fe1c19e76e07218bfc5171c23240a54a726b91b1
 
-        mainnet.genesis.GetHash():      00000b4e6d23c916f39c4dc92cd45faf5dfeeea8b51d43aee01c2f7e2bab977f
-        mainnet.genesis.hashMerkleRoot: 301b640a692b4007e625422264c59df43e7f5559d76f0d91f3db517abdd2dac6
-        mainnet.genesis.nTime:          1531969200
-        mainnet.genesis.nNonce:         26942
+        mainnet.genesis.GetHash():      00000ef8f68dfa24b1d004ea73b55f1a90ea1787a033bcd8ce84bdac7526cfc9
+        mainnet.genesis.hashMerkleRoot: 95c3dd755be8df88257a6f62fe1c19e76e07218bfc5171c23240a54a726b91b1
+        mainnet.genesis.nTime:          1532070000
+        mainnet.genesis.nNonce:         647464
         */
 
         /**
@@ -98,12 +98,12 @@ public:
          * uint32_t nNonce// 26942
          * uint32_t nBits // 0x1e0ffff0
          */
-        genesis = CreateGenesisBlock(1531969200, 26942, 0x1e0ffff0);
+        genesis = CreateGenesisBlock(1532070000, 647464, 0x1e0ffff0);
 
         hashGenesisBlock = genesis.GetHash();
 
-        assert(hashGenesisBlock == uint256("0x00000b4e6d23c916f39c4dc92cd45faf5dfeeea8b51d43aee01c2f7e2bab977f"));
-        assert(genesis.hashMerkleRoot == uint256("0x301b640a692b4007e625422264c59df43e7f5559d76f0d91f3db517abdd2dac6"));
+        assert(hashGenesisBlock == uint256("0x00000ef8f68dfa24b1d004ea73b55f1a90ea1787a033bcd8ce84bdac7526cfc9"));
+        assert(genesis.hashMerkleRoot == uint256("0x95c3dd755be8df88257a6f62fe1c19e76e07218bfc5171c23240a54a726b91b1"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 115); // o
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 29);
@@ -158,25 +158,25 @@ public:
         strDataDir = "testnet";
 
         /*
-        mainnet.genesis :
-            CBlock(hash=000007566ffdd7a6ede4433ab7874639779580255e09a93639cc0262845cf277, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=dac8b6472c411198522927fa99108627cbfe9ac907035da68d3f9035c38dc7d3, nTime=1531969400, nBits=1e0ffff0, nNonce=2235185, vtx=1, vchBlockSig=)
-          Coinbase(hash=dac8b6472c411198522927fa99108627cbfe9ac907035da68d3f9035c38dc7d3, nTime=1531969400, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-            CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a2a576f726c64204375702066696e616c20726573756c743a204672616e636520342d322043726f61746961)
+        testnet.genesis :
+            CBlock(hash=00000dc4c8fd63f9968d57fb64682fa966bcd914618cb1d1dc5d3cb7c1809d9e, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=9c7598dd90e0328bbf01130a7191325b50db7273d4e80e26ca26d68cab7e5090, nTime=1532070300, nBits=1e0ffff0, nNonce=4258358, vtx=1, vchBlockSig=)
+          Coinbase(hash=9c7598dd90e0328bbf01130a7191325b50db7273d4e80e26ca26d68cab7e5090, nTime=1532070300, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+            CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a2f576f726c642043757020323031382046696e616c20526573756c743a204672616e636520342d322043726f61746961)
             CTxOut(empty)
 
-          vMerkleTree:  dac8b6472c411198522927fa99108627cbfe9ac907035da68d3f9035c38dc7d3
+          vMerkleTree:  9c7598dd90e0328bbf01130a7191325b50db7273d4e80e26ca26d68cab7e5090
 
-        mainnet.genesis.GetHash():      000007566ffdd7a6ede4433ab7874639779580255e09a93639cc0262845cf277
-        mainnet.genesis.hashMerkleRoot: dac8b6472c411198522927fa99108627cbfe9ac907035da68d3f9035c38dc7d3
-        mainnet.genesis.nTime:          1531969400
-        mainnet.genesis.nNonce:         2235185
+        mainnet.genesis.GetHash():      00000dc4c8fd63f9968d57fb64682fa966bcd914618cb1d1dc5d3cb7c1809d9e
+        mainnet.genesis.hashMerkleRoot: 9c7598dd90e0328bbf01130a7191325b50db7273d4e80e26ca26d68cab7e5090
+        mainnet.genesis.nTime:          1532070300
+        mainnet.genesis.nNonce:         4258358
         */
-        genesis = CreateGenesisBlock(1531969400, 2235185, 0x1e0ffff0);
+        genesis = CreateGenesisBlock(1532070300, 4258358, 0x1e0ffff0);
 
         hashGenesisBlock = genesis.GetHash();
 
-        assert(hashGenesisBlock == uint256("0x000007566ffdd7a6ede4433ab7874639779580255e09a93639cc0262845cf277"));
-        assert(genesis.hashMerkleRoot == uint256("0xdac8b6472c411198522927fa99108627cbfe9ac907035da68d3f9035c38dc7d3"));
+        assert(hashGenesisBlock == uint256("0x00000dc4c8fd63f9968d57fb64682fa966bcd914618cb1d1dc5d3cb7c1809d9e"));
+        assert(genesis.hashMerkleRoot == uint256("0x9c7598dd90e0328bbf01130a7191325b50db7273d4e80e26ca26d68cab7e5090"));
 
         vFixedSeeds.clear();
         vSeeds.clear();

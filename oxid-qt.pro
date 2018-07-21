@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = Oxid-qt
-VERSION = 1.0.10
+VERSION = 1.0.12
 INCLUDEPATH += src src/json src/qt src/qt/plugins/mrichtexteditor
 QT += network printsupport
 DEFINES += ENABLE_WALLET
