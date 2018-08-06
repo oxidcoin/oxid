@@ -94,9 +94,9 @@ public:
         */
 
         /**
-         * uint32_t nTime
-         * uint32_t nNonce// 647464
-         * uint32_t nBits // 0x1e0ffff0
+         * uint32_t nTime  // 1532070000
+         * uint32_t nNonce // 647464
+         * uint32_t nBits  // 0x1e0ffff0
          */
         genesis = CreateGenesisBlock(1532070000, 647464, 0x1e0ffff0);
 
