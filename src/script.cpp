@@ -2012,11 +2012,6 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
     return set_success(serror);
 }
 
-
-
-
-
-
 uint256 SignatureHash(CScript scriptCode, const CTransaction& txTo, unsigned int nIn, int nHashType)
 {
     if (nIn >= txTo.vin.size())
@@ -2077,7 +2072,6 @@ uint256 SignatureHash(CScript scriptCode, const CTransaction& txTo, unsigned int
     ss << txTmp << nHashType;
     return ss.GetHash();
 }
-
 
 bool SignSignature(const CKeyStore &keystore, const CScript& fromPubKey, CTransaction& txTo, unsigned int nIn, int nHashType)
 {
@@ -2657,30 +2651,6 @@ bool ExtractDestinations(const CScript& scriptPubKey, txnouttype& typeRet, vecto
     return true;
 }
 
-/*uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsigned int nIn, int nHashType)
-{
-    if (nIn >= txTo.vin.size()) {
-        //  nIn out of range
-        return 1;
-    }
-
-    // Check for invalid use of SIGHASH_SINGLE
-    if ((nHashType & 0x1f) == SIGHASH_SINGLE) {
-        if (nIn >= txTo.vout.size()) {
-            //  nOut out of range
-            return 1;
-        }
-    }
-
-    // Wrapper to serialize only the necessary parts of the transaction being signed
-    CTransactionSignatureSerializer txTmp(txTo, scriptCode, nIn, nHashType);
-
-    // Serialize and hash
-    CHashWriter ss(SER_GETHASH, 0);
-    ss << txTmp << nHashType;
-    return ss.GetHash();
-}*/
-
 bool SignatureChecker::VerifySignature(const std::vector<unsigned char>& vchSig, const CPubKey& pubkey, const uint256& sighash) const
 {
     return pubkey.Verify(sighash, vchSig);
@@ -2706,7 +2676,6 @@ bool SignatureChecker::CheckSig(const vector<unsigned char>& vchSigIn, const vec
 
     return true;
 }
-
 
 bool VerifyScript(const CScript& scriptSig, const CScript& scriptPubKey, const CTransaction& txTo, unsigned int nIn, unsigned int flags, int nHashType)
 {
@@ -2796,53 +2765,6 @@ bool VerifyScript(const CScript& scriptSig, const CScript& scriptPubKey, unsigne
 
     return set_success(serror);
 }
-
-
-/*bool SignSignature(const CKeyStore &keystore, const CScript& fromPubKey, CTransaction& txTo, unsigned int nIn, int nHashType)
-{
-    assert(nIn < txTo.vin.size());
-    CTxIn& txin = txTo.vin[nIn];
-
-    // Leave out the signature from the hash, since a signature can't sign itself.
-    // The checksig op will also drop the signatures from its hash.
-    uint256 hash = SignatureHash(fromPubKey, txTo, nIn, nHashType);
-
-    txnouttype whichType;
-    if (!Solver(keystore, fromPubKey, hash, nHashType, txin.scriptSig, whichType))
-        return false;
-
-    if (whichType == TX_SCRIPTHASH)
-    {
-        // Solver returns the subscript that need to be evaluated;
-        // the final scriptSig is the signatures from that
-        // and then the serialized subscript:
-        CScript subscript = txin.scriptSig;
-
-        // Recompute txn hash using subscript in place of scriptPubKey:
-        uint256 hash2 = SignatureHash(subscript, txTo, nIn, nHashType);
-
-        txnouttype subType;
-        bool fSolved =
-            Solver(keystore, subscript, hash2, nHashType, txin.scriptSig, subType) && subType != TX_SCRIPTHASH;
-        // Append serialized subscript whether or not it is completely signed:
-        txin.scriptSig << static_cast<valtype>(subscript);
-        if (!fSolved) return false;
-    }
-
-    // Test solution
-    return VerifyScript(txin.scriptSig, fromPubKey, txTo, nIn, STANDARD_SCRIPT_VERIFY_FLAGS, 0);
-}*/
-
-/*bool SignSignature(const CKeyStore &keystore, const CTransaction& txFrom, CTransaction& txTo, unsigned int nIn, int nHashType)
-{
-    assert(nIn < txTo.vin.size());
-    CTxIn& txin = txTo.vin[nIn];
-    assert(txin.prevout.n < txFrom.vout.size());
-    assert(txin.prevout.hash == txFrom.GetHash());
-    const CTxOut& txout = txFrom.vout[txin.prevout.n];
-
-    return SignSignature(keystore, txout.scriptPubKey, txTo, nIn, nHashType);
-}*/
 
 bool VerifySignature(const CTransaction& txFrom, const CTransaction& txTo, unsigned int nIn, unsigned int flags, int nHashType)
 {

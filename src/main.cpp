@@ -2552,6 +2552,16 @@ bool CBlock::CheckBlock(bool fCheckPOW, bool fCheckMerkleRoot, bool fCheckSig) c
                     ExtractDestination(payee, address1);
                     COxidcoinAddress address2(address1);
 
+                    CScript winner;
+                    CMasternode* winningNode = mnodeman.GetCurrentMasterNode(1);
+                    if (winningNode) {
+                        winner = GetScriptForDestination(winningNode->pubkey.GetID());
+                        CTxDestination address3;
+                        ExtractDestination(winner, address3);
+                        COxidcoinAddress address4(address3);
+                        LogPrintf("Payee: %s => Winner: %s\n", address2.ToString(), address4.ToString());
+                    }
+
                     if(!foundPaymentAndPayee) {
                         if(fDebug) { LogPrintf("CheckBlock() : Couldn't find masternode payment(%d|%d) or payee(%d|%s) nHeight %d. \n", foundPaymentAmount, masternodePaymentAmount, foundPayee, address2.ToString().c_str(), pindexBest->nHeight+1); }
                         return DoS(100, error("CheckBlock() : Couldn't find masternode payment or payee"));
@@ -2706,20 +2716,6 @@ bool CBlock::AcceptBlock()
         BOOST_FOREACH(CNode* pnode, vNodes)
             if (nBestHeight > (pnode->nStartingHeight != -1 ? pnode->nStartingHeight - 2000 : nBlockEstimate))
                 pnode->PushInventory(CInv(MSG_BLOCK, hash));
-    }
-
-    // Record masternode payment
-    if (IsProofOfStake()) {
-        CScript payee;
-        for (int i = vtx[1].vout.size(); i--> 0; ) {
-            payee = vtx[1].vout[i].scriptPubKey;
-            break;
-        }
-        CTxDestination address1;
-        ExtractDestination(payee, address1);
-        COxidcoinAddress address2(address1);
-
-        mnodeman.RecordMasternodePayment(payee, nTime, PROTOCOL_VERSION);
     }
 
     return true;

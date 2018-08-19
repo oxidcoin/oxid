@@ -48,7 +48,7 @@ bool CMasternodeConfig::read(boost::filesystem::path path) {
                 rewardPercent = reward.substr(pos + 1);
                 rewardAddress = reward.substr(0, pos);
             }
-            CBitcoinAddress address(rewardAddress);
+            COxidcoinAddress address(rewardAddress);
             if (!address.IsValid()) {
                 LogPrintf("Invalid TX address in masternode.conf line: %s\n", line.c_str());
                 streamConfig.close();

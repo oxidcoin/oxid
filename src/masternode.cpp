@@ -125,7 +125,6 @@ CMasternode::CMasternode(const CMasternode& other)
     nScanningErrorCount = other.nScanningErrorCount;
     nLastScanningErrorBlockHeight = other.nLastScanningErrorBlockHeight;
     nLastPaid = other.nLastPaid;
-    nLastPaid = GetAdjustedTime();
     isPortOpen = other.isPortOpen;
     isOldNode = other.isOldNode;
 	tier = other.tier;
