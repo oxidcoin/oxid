@@ -509,7 +509,7 @@ CMasternode *CMasternodeMan::GetCurrentMasterNode(int mod, int64_t nBlockHeight,
 
 int CMasternodeMan::GetMasternodeRank(const CTxIn &vin, int64_t nBlockHeight,
                                       int minProtocol, bool fOnlyActive) {
-  std::vector<pair<unsigned int, CTxIn>> vecMasternodeScores;
+  std::vector<pair<unsigned int, CTxIn> > vecMasternodeScores;
 
   // make sure we know about this block
   uint256 hash = 0;
@@ -548,10 +548,10 @@ int CMasternodeMan::GetMasternodeRank(const CTxIn &vin, int64_t nBlockHeight,
   return -1;
 }
 
-std::vector<pair<int, CMasternode>>
+std::vector<pair<int, CMasternode> >
 CMasternodeMan::GetMasternodeRanks(int64_t nBlockHeight, int minProtocol) {
-  std::vector<pair<unsigned int, CMasternode>> vecMasternodeScores;
-  std::vector<pair<int, CMasternode>> vecMasternodeRanks;
+  std::vector<pair<unsigned int, CMasternode> > vecMasternodeScores;
+  std::vector<pair<int, CMasternode> > vecMasternodeRanks;
 
   // make sure we know about this block
   uint256 hash = 0;
@@ -592,7 +592,7 @@ CMasternode *CMasternodeMan::GetMasternodeByRank(int nRank,
                                                  int64_t nBlockHeight,
                                                  int minProtocol,
                                                  bool fOnlyActive) {
-  std::vector<pair<unsigned int, CTxIn>> vecMasternodeScores;
+  std::vector<pair<unsigned int, CTxIn> > vecMasternodeScores;
 
   // scan for winner
   BOOST_FOREACH (CMasternode &mn, vMasternodes) {
